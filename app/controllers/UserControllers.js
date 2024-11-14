@@ -26,7 +26,7 @@ const userController = {
 
     createUser: async (req, res) => {
         try {
-            const { name, cpf , email, password } = req.body;
+            const { name, cpf, email, password } = req.body;
             const newUser = await User.create(req.body);
             res.status(201).json(newUser);
         } catch (error) {

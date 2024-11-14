@@ -1,7 +1,7 @@
 const pool = require('../config.js');
 
 const User = {
-    getAll: async ()=> {
+    getAll: async () => {
         const result = await pool.query('SELECT * FROM users');
         return result.rows;
     },
@@ -11,15 +11,15 @@ const User = {
         return result.rows[0];
     },
 
-    create: async ({name, cpf, email, password }) => {
+    create: async ({ name, cpf, email, password }) => {
         const result = await pool.query(
             'INSERT INTO users (name, cpf, email, password) VALUES ($1, $2, $3, $4) RETURNING *',
             [name, cpf, email, password]
         );
         return result.rows[0];
     },
-    
-    update: async ({id, name, email, password}) => {
+
+    update: async ({ id, name, email, password }) => {
         const result = await pool.query(
             'UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4 RETURNING *',
             [name, email, password, id]
