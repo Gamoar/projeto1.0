@@ -38,13 +38,7 @@ const userController = {
         try {
             const { id } = req.params;
             const { name, email, password } = req.body;
-            const obj = {
-                id: id,
-                name: name,
-                email: email,
-                password: password
-            };
-            const updateUser = await User.update(obj);
+            const updateUser = await User.update({id, name, password, email});
             if (updateUser) {
                 res.json(updateUser);
             } else {
