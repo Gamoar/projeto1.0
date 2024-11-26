@@ -11,18 +11,18 @@ const Car = {
         return result.rows[0];
     },
 
-    create: async ({ model, manufactured_year, price, stock }) => {
+    create: async ({ model, manufactured_year, price }) => {
         const result = await pool.query(
-            'INSERT INTO cars (model, manufactured_year, price, stock) VALUES ($1, $2, $3, $4) RETURNING *',
-            [model, manufactured_year, price, stock]
+            'INSERT INTO cars (model, manufactured_year, price) VALUES ($1, $2, $3) RETURNING *',
+            [model, manufactured_year, price]
         );
         return result.rows[0];
     },
 
-    update: async ({ id, price, stock }) => {
+    update: async ({ id, price }) => {
         const result = await pool.query(
-            'UPDATE cars SET price = $1, stock = $2 WHERE id = $3 RETURNING *',
-            [ price, stock, id]
+            'UPDATE cars SET price = $1 = $2 WHERE id = $3 RETURNING *',
+            [ price, id]
         );
         return result.rows[0];
     },

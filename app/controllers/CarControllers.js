@@ -26,7 +26,7 @@ const carController = {
 
     createCar: async (req, res) => {
         try {
-            const { model, cpf, manufactured_year, price, stock } = req.body;
+            const { model, manufactured_year, price } = req.body;
             const newcar = await Car.create(req.body);
             res.status(201).json(newcar);
         } catch (error) {
@@ -37,8 +37,8 @@ const carController = {
     updateCar: async (req, res) => {
         try {
             const { id } = req.params;
-            const { price, stock } = req.body;
-            const updatecar = await Car.update({price, stock, id});
+            const { price } = req.body;
+            const updatecar = await Car.update({price, id});
             if (updatecar) {
                 res.json(updatecar);
             } else {

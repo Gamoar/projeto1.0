@@ -26,6 +26,7 @@ const userController = {
 
     createUser: async (req, res) => {
         try {
+            res.setHeader("Access-Control-Allow-Origin", "*");
             const { name, cpf, email, password } = req.body;
             const newUser = await User.create(req.body);
             res.status(201).json(newUser);
