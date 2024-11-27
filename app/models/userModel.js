@@ -6,8 +6,8 @@ const User = {
         return result.rows;
     },
 
-    getById: async (id) => {
-        const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+    findOne: async (column, value) => {
+        const result = await pool.query(`SELECT * FROM users WHERE ${column} = $1`, [value]);
         return result.rows[0];
     },
 

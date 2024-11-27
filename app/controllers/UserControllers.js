@@ -1,4 +1,6 @@
 const User = require('../models/userModel');
+const userService = require("../services/userService");
+
 
 const userController = {
     getAllUsers: async (req, res) => {
@@ -27,19 +29,19 @@ const userController = {
     createUser: async (req, res) => {
         try {
             res.setHeader("Access-Control-Allow-Origin", "*");
-            const { name, cpf, email, password } = req.body;
-            const newUser = await User.create(req.body);
+            const newUser = await userService.create(req.body);
             res.status(201).json(newUser);
         } catch (error) {
             console.log(error);
-            res.status(500).json({ error: 'Erro ao criar Usuário' });
+            if (error.status) return res.status(error.status).json({ error: error.message });
+            res.status(500).json({ error: "Erro a criar Usuário" });
         }
     },
     updateUser: async (req, res) => {
         try {
             const { id } = req.params;
             const { name, email, password } = req.body;
-            const updateUser = await User.update({id, name, password, email});
+            const updateUser = await User.update({ id, name, password, email });
             if (updateUser) {
                 res.json(updateUser);
             } else {
