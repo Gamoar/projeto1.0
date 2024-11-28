@@ -15,8 +15,8 @@ const userService = {
     login: async (user) => {
         const catchUser = await User.findOne("cpf", user.cpf)
         console.log(catchUser);
-        if (!catchUser) throw ({ status: 400, message: "Usuário invalidó" });
-        if (catchUser.password!=user.password) throw ({ status: 400, message: "Usuario invalidó" });
+        if (!catchUser) throw ({ status: 400, message: "Usuário inválido" });
+        if (catchUser.password!=user.password) throw ({ status: 400, message: "Usuário inválido" });
         return catchUser;
     },
 

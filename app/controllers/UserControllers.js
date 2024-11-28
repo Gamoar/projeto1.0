@@ -31,7 +31,7 @@ const userController = {
             const user = await userService.login(req.body);
             res.status(200).json(user);
         } catch (error) {
-            res.status(401).json({ error: "Erro de Login" });
+            res.status(401).json({ error: "Credenciais inválidas" });
         }
     },
 
